@@ -7,7 +7,11 @@ from math import sqrt
 # and found the population standard deviation.
 def convertText(l):
     for i in range(len(l)):
-        l[i] = int(l[i].text)
+        points = l[i].text
+        if len(points.strip()) > 0:
+            l[i] = int(points)
+        else:
+            l[i] = 0
 
 def average(l):
     sum = 0
@@ -56,8 +60,13 @@ for games in regseason:
     selfscores = []
     oppscores = []
     for score1, score2 in zip(selfscore, oppscore):
-        selfscores.append(int(score1.text))
-        oppscores.append(int(score2.text))
+        score1Value = score1.text
+        score2Value = score2.text
+        if len(score1Value.strip()) > 0 and len(score2Value.strip()) > 0:
+            selfscores.append(int(score1.text))
+            oppscores.append(int(score2.text))
+        else:
+            continue
 teamdifferential = [] #<0 means loss, >0 means win
 true_difference = [] #absolute value of difference
 wins = 0
